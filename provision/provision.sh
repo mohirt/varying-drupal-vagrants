@@ -413,7 +413,7 @@ if [[ $ping_result == *bytes?from* ]]; then
 		mv drupal* drupal-stable
 		cd /srv/www/drupal-stable/sites
 		echo "Configuring Drupal Stable..."
-		drush si --db-url=mysql://root:root@localhost/drupal_test --account-name=admin --account-pass=password --db-su=root --db-su-pw=root --site-name='Welcome to My Drupal Site' --y
+		drush si --db-url=mysql://root:root@localhost/drupal_default --account-name=admin --account-pass=password --db-su=root --db-su-pw=root --site-name='Welcome to My Drupal Site' --y
 	fi
 
 	# Download phpMyAdmin

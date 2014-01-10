@@ -111,28 +111,17 @@ The network configuration picks an IP of 192.168.50.4. This works if you are *no
 
 ### Credentials and Such
 
-All database usernames and passwords for WordPress installations included by default are `wp` and `wp`.
+All database usernames and passwords for Drupal installations included by default are `root` and `root`.
 
-All WordPress admin usernames and passwords for WordPress installations included by default are `admin` and `password`.
+All Drupal admin usernames and passwords for Drupal installations included by default are `admin` and `password`.
 
-#### WordPress Stable
-* URL: `http://local.wordpress.dev`
-* DB Name: `wordpress_default`
-
-#### WordPress Trunk
-* URL: `http://local.wordpress-trunk.dev`
-* DB Name: `wordpress_trunk`
-
-#### WordPress Develop
-* /src URL: `http://src.wordpress-develop.dev`
-* /build URL: `http://build.wordpress-develop.dev`
-* DB Name: `wordpress_develop`
-* DB Name: `wordpress_unit_tests`
+#### Drupal Stable
+* URL: `http://local.drupal.dev`
+* DB Name: `drupal_default`
 
 #### MySQL Root
 * User: `root`
 * Pass: `root`
-* See: [Connecting to MySQL](https://github.com/10up/varying-vagrant-vagrants/wiki/Connecting-to-MySQL) from your local machine
 
 ### What do you get?
 
@@ -163,12 +152,6 @@ A bunch of stuff!
 1. [Webgrind](https://github.com/jokkedk/webgrind)
 1. [NodeJs](http://nodejs.org/) Current Stable Version
 1. [grunt-cli](https://github.com/gruntjs/grunt-cli) Current Stable Version
-
-### Need Help?
-
-* Let us have it! Don't hesitate to open a new issue on GitHub if you run into trouble or have any tips that we need to know.
-* There is a [Mailing list](https://groups.google.com/forum/#!forum/wordpress-and-vagrant) for any topic related to WordPress and Vagrant that is a great place to get started.
-* The [VVV Wiki](https://github.com/10up/varying-vagrant-vagrants/wiki) also contains documentation that may help.
 
 ### More Context
 
