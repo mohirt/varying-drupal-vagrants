@@ -359,16 +359,16 @@ fi
 if [[ $ping_result == *bytes?from* ]]; then
 
 	## Drush install
-	if[[ ! -d /srv/www/drush ]]; then
-		echo -e "\nDownloading drush..."
-		git clone https://github.com/drush-ops/drush.git /srv/www/drush-ops
+	if [[ ! -d /srv/www/drush ]]; then
+	   echo -e "\nDownloading drush..."
+	   git clone https://github.com/drush-ops/drush.git /srv/www/drush
 	else
-		echo -e "\nUpdating drush..."
-		cd /srv/www/drush
-		git pull --rebase origin master
+	   echo -e "\nUpdating drush..."
+	   cd /srv/www/drush
+	   git pull --rebase origin master
 	fi
 	# Link 'drush' to the '/usr/local/bin' directory
-		ln -sf /srv/www/drush/drush /usr/local/bin/drush
+	   ln -sf /srv/www/drush/drush /usr/local/bin/drush
 
 
 	# Download and extract phpMemcachedAdmin to provide a dashboard view and
