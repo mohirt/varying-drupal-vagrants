@@ -218,12 +218,10 @@ if [[ $ping_result == *bytes?from* ]]; then
 		echo "Updating Grunt CLI"
 		npm update -g grunt-cli &>/dev/null
 		npm update -g grunt-sass &>/dev/null
-		npm update -g grunt-cssjanus &>/dev/null
 	else
 		echo "Installing Grunt CLI"
 		npm install -g grunt-cli &>/dev/null
 		npm install -g grunt-sass &>/dev/null
-		npm install -g grunt-cssjanus &>/dev/null
 	fi
 else
 	echo -e "\nNo network connection available, skipping package installation"
@@ -254,14 +252,14 @@ echo " * /srv/config/init/vvv-start.conf               -> /etc/init/vvv-start.co
 
 # Copy nginx configuration from local
 cp /srv/config/nginx-config/nginx.conf /etc/nginx/nginx.conf
-cp /srv/config/nginx-config/nginx-wp-common.conf /etc/nginx/nginx-wp-common.conf
+cp /srv/config/nginx-config/nginx-dr-common.conf /etc/nginx/nginx-dr-common.conf
 if [[ ! -d /etc/nginx/custom-sites ]]; then
 	mkdir /etc/nginx/custom-sites/
 fi
 rsync -rvzh --delete /srv/config/nginx-config/sites/ /etc/nginx/custom-sites/
 
 echo " * /srv/config/nginx-config/nginx.conf           -> /etc/nginx/nginx.conf"
-echo " * /srv/config/nginx-config/nginx-wp-common.conf -> /etc/nginx/nginx-wp-common.conf"
+echo " * /srv/config/nginx-config/nginx-dr-common.conf -> /etc/nginx/nginx-dr-common.conf"
 echo " * /srv/config/nginx-config/sites/               -> /etc/nginx/custom-sites"
 
 # Copy php-fpm configuration from local
@@ -434,7 +432,7 @@ if [[ $ping_result == *bytes?from* ]]; then
 		
 		sudo gem install compass
 		sudo gem install guard
-		
+
 	# Download phpMyAdmin
 	if [[ ! -d /srv/www/default/database-admin ]]; then
 		echo "Downloading phpMyAdmin 4.0.10..."
