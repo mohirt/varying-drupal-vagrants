@@ -416,6 +416,25 @@ if [[ $ping_result == *bytes?from* ]]; then
 		drush si --db-url=mysql://root:root@localhost/drupal_default --account-name=admin --account-pass=password --db-su=root --db-su-pw=root --site-name='Welcome to My Drupal Site' --y
 	fi
 
+	# Download and Compile Latest stable Ruby v 2.0.0
+	if [[ ! -d /usr/local/bin/ruby ]]; then
+		echo "Downloading and Compiling latest stable Ruby, http://ruby-lang.org"
+		cd /tmp
+		wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz
+		tar -xzf ruby-2.0.0-p353.tar.gz
+		cd ruby-2.0.0-p353.tar.gz/
+		./configure --prefix=/usr/local
+		make
+		sudo make install
+	else
+		echo "Ruby already installed"
+	fi
+
+	# Download and install gems: Compass Sass, guard.
+		
+		sudo gem install compass
+		sudo gem install guard
+		
 	# Download phpMyAdmin
 	if [[ ! -d /srv/www/default/database-admin ]]; then
 		echo "Downloading phpMyAdmin 4.0.10..."
