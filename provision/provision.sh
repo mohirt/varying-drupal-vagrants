@@ -420,7 +420,7 @@ if [[ $ping_result == *bytes?from* ]]; then
 		cd /tmp
 		wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz
 		tar -xzf ruby-2.0.0-p353.tar.gz
-		cd ruby-2.0.0-p353.tar.gz/
+		cd ruby-2.0.0-p353/
 		./configure --prefix=/usr/local
 		make
 		sudo make install
