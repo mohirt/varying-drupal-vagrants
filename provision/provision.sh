@@ -412,6 +412,8 @@ if [[ $ping_result == *bytes?from* ]]; then
 		cd /srv/www/drupal-stable/sites
 		echo "Configuring Drupal Stable..."
 		drush si --db-url=mysql://root:root@localhost/drupal_default --account-name=admin --account-pass=password --db-su=root --db-su-pw=root --site-name='Welcome to My Drupal Site' --y
+	else
+		echo "Drupal-stable already installed..."
 	fi
 
 	# Download and Compile Latest stable Ruby v 2.0.0

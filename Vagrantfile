@@ -109,7 +109,7 @@ Vagrant.configure("2") do |config|
   # a mapped directory inside the VM will be created that contains these files.
   # This directory is currently used to maintain various config files for php and
   # nginx as well as any pre-existing database files.
-  config.vm.synced_folder "config/", "/srv/config"
+  config.vm.synced_folder "config/", "/srv/config", :nfs => true
 
   # /srv/www/
   #
