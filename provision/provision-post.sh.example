@@ -1,31 +1,42 @@
-#Store location of profiles directory to profilesDir
-profilesDir=/srv/www/profiles
+##	Please fill out the below with your  ##
+##	repo information			 		 ##
+###########################################
+
+siteprofile=() #Please separate each repo by a comma
 
 cd /srv/www/profiles
-#Store a list of profiles to profileNames array
-profileNames=$(ls)
 
-#Loop through profileNames array
-for profile in ${profileNames}
+for profile in ${siteprofile}
 do
-	#Check to see if there's an existing profile in our drupal profiles directory,
-	#if there is then skip the rsync
-	if [[ -d /srv/www/drupal-stable/profiles/$profile ]]; then
+	git clone $profile
+	# if [[ -z "$gitbranch" ]]; then
+	# 	git checkout $gitbranch
+	# fi
+done
+
+siteprofile=$(ls)
+	
+for profile in ${siteprofile}
+do
+	if [[ -d /srv/www/drupal-stable/sites/$profile ]]; then
 		echo "${profile} already exists..."
 	else
-		#rsync the entire profile to our drupal profiles driectory
+
+		#Check to see if there's an existing profile in our drupal profiles directory,
+ 		#if there is then skip the rsync
 		echo "Copying profile ${profile} and building new site ${profile}.local.drupal.dev"
-		rsync -ar $profilesDir/$profile /srv/www/drupal-stable/profiles
-		
-		echo "Begin drush make..."
+		rsync -ar /srv/www/profiles/$profile /srv/www/drupal-stable/profiles
+
 		#Begin the drush make process of our profile. We set the --no-gitinfofile flag 
-		#to ommit git time and version stamping at the bottom of our install profile documents.
-		cd /srv/www/drupal-stable/profiles/$profile/
+ 		#to ommit git time and version stamping at the bottom of our install profile documents.
+		echo "Begin drush make..."
+		cd /srv/www/drupal-stable/profiles/$profile
 		drush make --no-core --contrib-destination=. $profile.make --no-gitinfofile --y
 
 		#Begin our site install base on the name of the item in our array.
-		#We create a new site subdirectory named $profile.local.drupal.dev and we establish
-		#some initial login credentials, which are username = admin and password = password 
+ 		#We create a new site subdirectory named $profile.local.drupal.dev and we establish
+ 		#some initial login credentials, which are username = admin and password = password 
+
 		cd /srv/www/drupal-stable/sites/
 		drush si $profile --sites-subdir=$profile.local.drupal.dev --db-url=mysql://root:root@localhost/$profile --account-name=admin --account-pass=password --db-su=root --db-su-pw=root --site-name=$profile --y
 		echo "Login credentials are username: admin, password: password"
