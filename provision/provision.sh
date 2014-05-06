@@ -88,7 +88,7 @@ apt_package_check_list=(
 	graphviz
 
 	# Ruby 2.1
-#	ruby2.1
+	ruby2.1
 
 	# dos2unix
 	# Allows conversion of DOS style line endings to something we'll have less
@@ -152,17 +152,14 @@ if [[ $ping_result == *bytes?from* ]]; then
 		gpg -q --keyserver keyserver.ubuntu.com --recv-key ABF5BD827BD9BF62
 		gpg -q -a --export ABF5BD827BD9BF62 | apt-key add -
 
-		# Launchpad Subversion key EAA903E3A2F4C039
-#		gpg -q --keyserver keyserver.ubuntu.com --recv-key EAA903E3A2F4C039
-#		gpg -q -a --export EAA903E3A2F4C039 | apt-key add -
-
 		# Launchpad PHP key 4F4EA0AAE5267A6C
 		gpg -q --keyserver keyserver.ubuntu.com --recv-key 4F4EA0AAE5267A6C
 		gpg -q -a --export 4F4EA0AAE5267A6C | apt-key add -
 
-		# Launchpad git key A1715D88E1DF1F24
-#		gpg -q --keyserver keyserver.ubuntu.com --recv-key A1715D88E1DF1F24
-#		gpg -q -a --export A1715D88E1DF1F24 | apt-key add -
+        # Ruby 2.1 key C3173AA6
+
+        gpg -q --keyserver keyserver.ubuntu.com --recv-key C3173AA6
+        gpg -q -a --export C3173AA6 | apt-key add -
 
 		# Launchpad nodejs key C7917B12
 		gpg -q --keyserver keyserver.ubuntu.com --recv-key C7917B12
