@@ -2,21 +2,24 @@
 # versions of various packages that are installed
 
 # Provides SVN 1.7.9
-deb http://ppa.launchpad.net/svn/ppa/ubuntu precise main 
-deb-src http://ppa.launchpad.net/svn/ppa/ubuntu precise main
+#deb http://ppa.launchpad.net/svn/ppa/ubuntu trusty main
+#deb-src http://ppa.launchpad.net/svn/ppa/ubuntu trusty main
+# TODO: Find proper repo for SVN
 
 # Provides PHP 5.4
-deb http://ppa.launchpad.net/ondrej/php5-oldstable/ubuntu precise main
-deb-src http://ppa.launchpad.net/ondrej/php5-oldstable/ubuntu precise main
+deb http://ppa.launchpad.net/ondrej/php5-oldstable/ubuntu trusty main
+deb-src http://ppa.launchpad.net/ondrej/php5-oldstable/ubuntu trusty main
 
-# Provides Nginx 1.4
-deb http://nginx.org/packages/ubuntu/ precise nginx
-deb-src http://nginx.org/packages/ubuntu/ precise nginx
+# Provides Nginx 1.5
+ deb http://nginx.org/packages/ubuntu/ trusty nginx
+ deb-src http://nginx.org/packages/ubuntu/ trusty nginx
 
-# Provides Git 1.8
-deb http://ppa.launchpad.net/git-core/ppa/ubuntu precise main 
-deb-src http://ppa.launchpad.net/git-core/ppa/ubuntu precise main
 
 # Provides Node.js
-deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main
-deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main
+deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
+deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main
+
+# Provides Ruby 2.0.0-*
+
+deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main
+deb-src http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main

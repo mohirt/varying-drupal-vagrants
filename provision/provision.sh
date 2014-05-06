@@ -87,6 +87,9 @@ apt_package_check_list=(
 	# Req'd for Webgrind
 	graphviz
 
+	# Ruby 2.1
+	ruby2.1
+
 	# dos2unix
 	# Allows conversion of DOS style line endings to something we'll have less
 	# trouble with in Linux.
@@ -129,10 +132,10 @@ echo mysql-server mysql-server/root_password_again password root | debconf-set-s
 # Internet connection does not allow communication over port 25, you will not be
 # able to send mail, even with postfix installed.
 echo postfix postfix/main_mailer_type select Internet Site | debconf-set-selections
-echo postfix postfix/mailname string vvv | debconf-set-selections
+echo postfix postfix/mailname string vdv | debconf-set-selections
 
 # Provide our custom apt sources before running `apt-get update`
-ln -sf /srv/config/apt-source-append.list /etc/apt/sources.list.d/vvv-sources.list
+ln -sf /srv/config/apt-source-append.list /etc/apt/sources.list.d/vdv-sources.list
 echo "Linked custom apt sources"
 
 if [[ $ping_result == *bytes?from* ]]; then
@@ -246,9 +249,9 @@ fi
 echo -e "\nSetup configuration files..."
 
 # Used to to ensure proper services are started on `vagrant up`
-cp /srv/config/init/vvv-start.conf /etc/init/vvv-start.conf
+cp /srv/config/init/vdv-start.conf /etc/init/vdv-start.conf
 
-echo " * /srv/config/init/vvv-start.conf               -> /etc/init/vvv-start.conf"
+echo " * /srv/config/init/vdv-start.conf               -> /etc/init/vdv-start.conf"
 
 # Copy nginx configuration from local
 cp /srv/config/nginx-config/nginx.conf /etc/nginx/nginx.conf
@@ -360,14 +363,15 @@ if [[ $ping_result == *bytes?from* ]]; then
 	if [[ ! -d /srv/www/drush ]]; then
 	   echo -e "\nDownloading drush..."
 	   git clone https://github.com/drush-ops/drush.git /srv/www/drush
+	   cd /srv/www/drush
+	   # install composer to the local drush folder
+	   composer install
+	   ln -sf /srv/www/drush/drush /usr/local/bin/drush
 	else
 	   echo -e "\nUpdating drush..."
 	   cd /srv/www/drush
 	   git pull --rebase origin master
 	fi
-	# Link 'drush' to the '/usr/local/bin' directory
-	   ln -sf /srv/www/drush/drush /usr/local/bin/drush
-
 
 	# Download and extract phpMemcachedAdmin to provide a dashboard view and
 	# admin interface to the goings on of memcached when running
@@ -417,23 +421,22 @@ if [[ $ping_result == *bytes?from* ]]; then
 	fi
 
 	# Download and Compile Latest stable Ruby v 2.0.0
-	if [[ ! -d /usr/local/bin/ruby ]]; then
-		echo "Downloading and Compiling latest stable Ruby, http://ruby-lang.org"
-		cd /tmp
-		wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz
-		tar -xzf ruby-2.0.0-p353.tar.gz
-		cd ruby-2.0.0-p353/
-		./configure --prefix=/usr/local
-		make
-		sudo make install
-	else
-		echo "Ruby already installed"
-	fi
+#	if [[ ! -d /usr/local/bin/ruby ]]; then
+#		echo "Downloading and Compiling latest stable Ruby, http://ruby-lang.org"
+#		cd /tmp
+#		wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p451.tar.gz
+#		tar -xzf ruby-2.0.0-p451.tar.gz
+#		cd ruby-2.0.0-p451/
+#		./configure --prefix=/usr/local
+#		make
+#		sudo make install
+#	else
+#		echo "Ruby already installed"
+#	fi
 
-	# Download and install gems: Compass Sass, guard.
+	# Download and install gems: Compass Sass.
 		
 		sudo gem install compass
-		sudo gem install guard
 
 	# Download phpMyAdmin
 	if [[ ! -d /srv/www/default/database-admin ]]; then
