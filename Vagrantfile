@@ -16,80 +16,17 @@ Vagrant.configure("2") do |config|
   end
 
   # Forward Agent
-  #
-  # Enable agent forwarding on vagrant ssh commands. This allows you to use identities
-  # established on the host machine inside the guest. See the manual for ssh-add
   config.ssh.forward_agent = true
 
   # Default Ubuntu Box
-  #
-  # This box is provided by Vagrant at vagrantup.com and is a nicely sized (290MB)
-  # box containing the Ubuntu 12.0.4 Precise 32 bit release. Once this box is downloaded
-  # to your host computer, it is cached for future use under the specified box name.
-  config.vm.box = "trusty64"
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box = "ubuntu/trusty64"
 
   config.vm.hostname = "vvv"
 
-  # Local Machine Hosts
-  #
-  # If the Vagrant plugin hostsupdater (https://github.com/cogitatio/vagrant-hostsupdater) is
-  # installed, the following will automatically configure your local machine's hosts file to
-  # be aware of the domains specified below. Watch the provisioning script as you may be
-  # required to enter a password for Vagrant to access your hosts file.
-  #
-  # By default, we'll include the domains setup by VVV through the vvv-hosts file
-  # located in the www/ directory.
-  #
-  # Other domains can be automatically added by including a vvv-hosts file containing
-  # individual domains separated by whitespace in subdirectories of www/.
-  if defined? VagrantPlugins::HostsUpdater
-
-    # Capture the paths to all vvv-hosts files under the www/ directory.
-    paths = []
-    Dir.glob(vagrant_dir + '/www/**/vvv-hosts').each do |path|
-      paths << path
-    end
-
-    # Parse through the vvv-hosts files in each of the found paths and put the hosts
-    # that are found into a single array.
-    hosts = []
-    paths.each do |path|
-      new_hosts = []
-      file_hosts = IO.read(path).split( "\n" )
-      file_hosts.each do |line|
-        if line[0..0] != "#"
-          new_hosts << line
-        end
-      end
-      hosts.concat new_hosts
-    end
-
-    # Pass the final hosts array to the hostsupdate plugin so it can perform magic.
-    config.hostsupdater.aliases = hosts
-
-  end
-
   # Default Box IP Address
-  #
-  # This is the IP address that your host will communicate to the guest through. In the
-  # case of the default `192.168.50.4` that we've provided, VirtualBox will setup another
-  # network adapter on your host machine with the IP `192.168.50.1` as a gateway.
-  #
-  # If you are already on a network using the 192.168.50.x subnet, this should be changed.
-  # If you are running more than one VM through VirtualBox, different subnets should be used
-  # for those as well. This includes other Vagrant boxes.
   config.vm.network :private_network, ip: "192.168.50.4"
 
   # Drive mapping
-  #
-  # The following config.vm.synced_folder settings will map directories in your Vagrant
-  # virtual machine to directories on your local machine. Once these are mapped, any
-  # changes made to the files in these directories will affect both the local and virtual
-  # machine versions. Think of it as two different ways to access the same file. When the
-  # virtual machine is destroyed with `vagrant destroy`, your files will remain in your local
-  # environment.
-
   # /srv/database/
   #
   # If a database directory exists in the same directory as your Vagrantfile,
