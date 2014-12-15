@@ -432,8 +432,18 @@ if [[ $ping_result == *bytes?from* ]]; then
 #	fi
 
 	# Download and install gems: Compass Sass.
-		
-		sudo gem install compass
+	gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 
+	curl -L https://get.rvm.io | bash -s stable
+	source ~/.rvm/scripts/rvm
+	source ~/.profile
+	echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
+	echo "source ~/.profile" >> ~/.bashrc
+	rvm install 2.1.2
+	rvm use 2.1.2 --default
+	sudo apt-get install ruby-dev
+	sudo apt-get install build-essential
+	gem install bundler
+	gem install compass
 
 	# Download phpMyAdmin
 	if [[ ! -d /srv/www/default/database-admin ]]; then
