@@ -88,7 +88,8 @@ apt_package_check_list=(
 	graphviz
 
 	# Ruby 2.1
-	ruby2.1
+	ruby
+	ruby-dev
 
 	# dos2unix
 	# Allows conversion of DOS style line endings to something we'll have less
@@ -160,6 +161,9 @@ if [[ $ping_result == *bytes?from* ]]; then
 
         gpg -q --keyserver keyserver.ubuntu.com --recv-key C3173AA6
         gpg -q -a --export C3173AA6 | apt-key add -
+		
+		gpg -q --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 
+		gpg -q -a --export D39DC0E3 | apt-key add -
 
 		# Launchpad nodejs key C7917B12
 		gpg -q --keyserver keyserver.ubuntu.com --recv-key C7917B12
@@ -432,17 +436,17 @@ if [[ $ping_result == *bytes?from* ]]; then
 #	fi
 
 	# Download and install gems: Compass Sass.
-	gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 
-	curl -L https://get.rvm.io | bash -s stable
-	source ~/.rvm/scripts/rvm
-	source ~/.profile
-	echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
-	echo "source ~/.profile" >> ~/.bashrc
-	rvm install 2.1.2
-	rvm use 2.1.2 --default
-	sudo apt-get install ruby-dev
-	sudo apt-get install build-essential
-	gem install bundler
+#	gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 
+#	curl -L https://get.rvm.io | bash -s stable
+#	source ~/.rvm/scripts/rvm
+#	source ~/.profile
+#	echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
+#	echo "source ~/.profile" >> ~/.bashrc
+#	rvm install 2.1.2
+#	rvm use 2.1.2 --default
+#	sudo apt-get install ruby-dev
+#	sudo apt-get install build-essential
+#	gem install bundler
 	gem install compass
 
 	# Download phpMyAdmin
