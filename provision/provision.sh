@@ -421,32 +421,6 @@ if [[ $ping_result == *bytes?from* ]]; then
 		echo "Drupal-stable already installed..."
 	fi
 
-	# Download and Compile Latest stable Ruby v 2.0.0
-#	if [[ ! -d /usr/local/bin/ruby ]]; then
-#		echo "Downloading and Compiling latest stable Ruby, http://ruby-lang.org"
-#		cd /tmp
-#		wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p451.tar.gz
-#		tar -xzf ruby-2.0.0-p451.tar.gz
-#		cd ruby-2.0.0-p451/
-#		./configure --prefix=/usr/local
-#		make
-#		sudo make install
-#	else
-#		echo "Ruby already installed"
-#	fi
-
-	# Download and install gems: Compass Sass.
-#	gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 
-#	curl -L https://get.rvm.io | bash -s stable
-#	source ~/.rvm/scripts/rvm
-#	source ~/.profile
-#	echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
-#	echo "source ~/.profile" >> ~/.bashrc
-#	rvm install 2.1.2
-#	rvm use 2.1.2 --default
-#	sudo apt-get install ruby-dev
-#	sudo apt-get install build-essential
-#	gem install bundler
 	gem install compass
 
 	# Download phpMyAdmin
