@@ -88,7 +88,8 @@ apt_package_check_list=(
 	graphviz
 
 	# Ruby 2.1
-	ruby2.1
+	ruby
+	ruby-dev
 
 	# dos2unix
 	# Allows conversion of DOS style line endings to something we'll have less
@@ -160,6 +161,9 @@ if [[ $ping_result == *bytes?from* ]]; then
 
         gpg -q --keyserver keyserver.ubuntu.com --recv-key C3173AA6
         gpg -q -a --export C3173AA6 | apt-key add -
+		
+		gpg -q --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 
+		gpg -q -a --export D39DC0E3 | apt-key add -
 
 		# Launchpad nodejs key C7917B12
 		gpg -q --keyserver keyserver.ubuntu.com --recv-key C7917B12
@@ -417,23 +421,7 @@ if [[ $ping_result == *bytes?from* ]]; then
 		echo "Drupal-stable already installed..."
 	fi
 
-	# Download and Compile Latest stable Ruby v 2.0.0
-#	if [[ ! -d /usr/local/bin/ruby ]]; then
-#		echo "Downloading and Compiling latest stable Ruby, http://ruby-lang.org"
-#		cd /tmp
-#		wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p451.tar.gz
-#		tar -xzf ruby-2.0.0-p451.tar.gz
-#		cd ruby-2.0.0-p451/
-#		./configure --prefix=/usr/local
-#		make
-#		sudo make install
-#	else
-#		echo "Ruby already installed"
-#	fi
-
-	# Download and install gems: Compass Sass.
-		
-		sudo gem install compass
+	gem install compass
 
 	# Download phpMyAdmin
 	if [[ ! -d /srv/www/default/database-admin ]]; then
